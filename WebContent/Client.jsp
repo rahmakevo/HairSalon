@@ -1,4 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page 
+    language="java" 
+    contentType="text/html; charset=UTF-8"
+    import="com.rahmak.HairSalon.*"
+    import="java.util.*"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -54,6 +58,31 @@
 </a>
 </div>
 
+<%
+DbManager db = new DbManager();
+Stylist stylist = new Stylist();
+
+List<Stylist> stylists = db.selectAll();
+%>
+
+<div class="panel panel-default">
+<!-- Default panel contents -->
+<div class="panel-heading">Available Stylist</div>
+<div class="panel-body">
+<p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+</div>
+
+<%
+for (Stylist style:stylists) {
+	%>
+		<!-- List group -->
+	<ul class="list-group">
+	<li class="list-group-item"><%= style.getUsername() %></li>
+	</ul>
+	<%
+}
+%>
+</div>
 
 
 <!-- jQuery (necessary for bootstrap's JavaScript plugins) -->

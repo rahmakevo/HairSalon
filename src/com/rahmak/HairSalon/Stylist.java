@@ -71,4 +71,12 @@ public class Stylist {
 	 */
 	public Stylist() {
 	}
+	/**
+	 * @param id
+	 * @param username
+	 */
+	public Stylist(int id, String username) {
+		this.id = id;
+		this.username = username;
+	}
 }

@@ -6,7 +6,10 @@ package com.rahmak.HairSalon;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author rahmak
@@ -81,6 +84,30 @@ public class DbManager {
 		} finally {
 			closeConnection(connection);
 		}
+	}
+	
+	// create a List Stylist Array
+	public List<Stylist> selectAll(){
+		List<Stylist> stylists = new ArrayList<Stylist>();
+		
+		String sql = "select * from stylist";
+		Connection conn = getConnection();
+		try {
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet results = statement.executeQuery();
+			while(results.next()) {
+				int id = results.getInt("id");
+				String username = results.getString("username");
+				Stylist stylist = new Stylist(id, username);
+				stylists.add(stylist);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConnection(conn);
+		}
+		return stylists;
 	}
 
 	/**
