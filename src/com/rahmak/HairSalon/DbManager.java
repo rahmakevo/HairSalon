@@ -109,6 +109,66 @@ public class DbManager {
 		}
 		return stylists;
 	}
+	
+	// select one Stylist
+	public Stylist selectOne(int id) {
+		Stylist style = null;
+		String sql = "select * from stylist where id=?";
+		
+		// get a connection
+		// parse data
+		Connection conn = getConnection();
+		try {
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			ResultSet result = statement.executeQuery();
+			if(result.next()) {
+				id = result.getInt("id");
+				String username = result.getString("username");
+				style = new Stylist(id, username);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// close Connection
+			closeConnection(conn);
+		}
+		return style;
+	}
+	
+	public void remove(int id) {
+		String sql = "delete from applications where id=?";
+		
+		// get connection
+		Connection conn = getConnection();
+		try {
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			statement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConnection(conn);
+		}
+	}
+	
+	public void update(int id, Stylist style) {
+		String sql = "update stylist set username=?, userpassword=? where id=?";
+		
+		// get connection
+		Connection conn = getConnection();
+			try {
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeConnection(conn);
+			}
+	}
 
 	/**
 	 * @param args

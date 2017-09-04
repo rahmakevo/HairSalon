@@ -28,7 +28,7 @@
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
 </button>
-<a class="navbar-brand" href="#">Hair Salon</a>
+<a class="navbar-brand" href="index.jsp">Hair Salon</a>
 </div>
 
 <!-- collect the nav links -->
@@ -59,12 +59,24 @@
 </div>
 
 <%
+String id = request.getParameter("id");
+String username = request.getParameter("username");
+String action = request.getParameter("action");
 DbManager db = new DbManager();
 Stylist stylist = new Stylist();
 
+
+String select = "select";
+
+if(select.equals(action)) {
+	int mId = Integer.parseInt(id);
+	stylist = db.selectOne(mId);
+}
 List<Stylist> stylists = db.selectAll();
 %>
 
+<div class="container">
+<form action="Client.jsp">
 <div class="panel panel-default">
 <!-- Default panel contents -->
 <div class="panel-heading">Available Stylist</div>
@@ -75,16 +87,113 @@ List<Stylist> stylists = db.selectAll();
 <%
 for (Stylist style:stylists) {
 	%>
-		<!-- List group -->
 	<ul class="list-group">
-	<li class="list-group-item"><%= style.getUsername() %></li>
+	<li class="list-group-item">
+	<nav class="navbar navbar-default">
+	<div class="container">
+	
+	<!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#"><%= style.getUsername() %></a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+    <ul class="nav navbar-nav">
+    <li>
+     <form class="navbar-form navbar-left">
+    <div class="form-group">
+    <input name="username" class="form-control" value="<%= style.getUsername() %>">
+    </div>
+    <a href="Admin.jsp"><button type="button" class="btn btn-default">Select</button></a>
+    </form>
+    </li>
+    </ul>
+    </div>
+	</div>
+	</nav>
+	</li>
 	</ul>
 	<%
 }
 %>
 </div>
+</form>
+</div>
 
+<div class="row">
+<h3 class="text-center">Our Blogs</h3>
+<div class="col-xs-6 col-md-4">
+<div class="thumbnail">
+<img alt="service1" src="resources/images/download1.jpg">
+<div class="caption">
+<h3> Service 1</h3>
+<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+<p><a href="#" class="btn btn-primary" role="button">Learn More</a></p>
+</div>
+</div>
+</div>
 
+<div class="col-xs-6 col-md-4">
+<div class="thumbnail">
+<img alt="service1" src="resources/images/download2.jpg">
+<div class="caption">
+<h3> Service 2</h3>
+<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+<p><a href="#" class="btn btn-primary" role="button">Learn More</a></p>
+</div>
+</div>
+</div>
+
+<div class="col-xs-6 col-md-4">
+<div class="thumbnail">
+<img alt="service1" src="resources/images/download2.jpg">
+<div class="caption">
+<h3> Service 3</h3>
+<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+<p><a href="#" class="btn btn-primary" role="button">Learn More</a></p>
+</div>
+</div>
+</div>
+
+<div class="col-xs-6 col-md-4">
+<div class="thumbnail">
+<img alt="service1" src="resources/images/download3.jpg">
+<div class="caption">
+<h3> Service 4</h3>
+<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+<p><a href="#" class="btn btn-primary" role="button">Learn More</a></p>
+</div>
+</div>
+</div>
+
+<div class="col-xs-6 col-md-4">
+<div class="thumbnail">
+<img alt="service1" src="resources/images/download2.jpg">
+<div class="caption">
+<h3> Service 3</h3>
+<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+<p><a href="#" class="btn btn-primary" role="button">Learn More</a></p>
+</div>
+</div>
+</div>
+
+<div class="col-xs-6 col-md-4">
+<div class="thumbnail">
+<img alt="service1" src="resources/images/download3.jpg">
+<div class="caption">
+<h3> Service 4</h3>
+<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+<p><a href="#" class="btn btn-primary" role="button">Learn More</a></p>
+</div>
+</div>
+</div>
+</div>
 <!-- jQuery (necessary for bootstrap's JavaScript plugins) -->
 <script src="resources/js/jquery.min.js" charset="utf-8"></script>
 
